@@ -1,10 +1,10 @@
 /*************************************************************************
 Arquivo a ser processado pelo programa JavaCC.
-Cont�m:
-       - descri��o do analisador l�xico para a linguagem X++ 
+Contém:
+       - descrição do analisador léxico para a linguagem X++ 
 
-Autor: Francisco Teixeira, Marcelo ecker e P�ricles Cesar da Costa
-Este programa � parte do trabalho de Compiladores
+Autor: Francisco Teixeira, Marcelo ecker e Péricles Cesar da Costa
+Este programa é parte do trabalho de Compiladores
 ************************************************************************/
 options {
   STATIC = false;
@@ -18,19 +18,19 @@ import java.io.*;
 
 public class langX {
     final static String Version = "X++ Compiler - Version 1.0 - 2004";
-    boolean Menosshort = false; // sa�da resumida = falso
+    boolean Menosshort = false; // saída resumida = falso
 
 
-    // Define o m�todo "main" da classe langX.  
+    // Define o método "main" da classe langX.  
     public  static void main(String args[]) throws ParseException 
     {
         String filename = ""; // nome do arquivo a ser analisado
-        langX parser;     // analisador l�xico/sint�tico
+        langX parser;     // analisador léxico/sintático
         int i;
         boolean ms = false;
 
         System.out.println(Version);
-        // l� os par�metros passados para o compilador
+        // l� os parâmetros passados para o compilador
         for (i = 0; i < args.length - 1; i++)
         {
             if ( args[i].toLowerCase().equals("-short") )
@@ -43,12 +43,12 @@ public class langX {
         }
 
         if (args[i].equals("-"))
-        {       // l� da entrada padr�o      
+        {       // lê da entrada padrão      
             System.out.println("Reading from standard input . . .");
             parser = new langX(System.in);
         }
         else 
-        {       // l� do arquivo
+        {       // lê do arquivo
             filename = args[args.length-1];  
             System.out.println("Reading from file " + filename + " . . .");
             try {
@@ -60,8 +60,8 @@ public class langX {
             }
         } 
         parser.Menosshort = ms;
-        parser.program();   // chama o m�todo que faz a an�lise
-        if ( parser.token_source.foundLexError() != 0 ) // verifica se houve erro l�xico
+        parser.program();   // chama o m�todo que faz a análise
+        if ( parser.token_source.foundLexError() != 0 ) // verifica se houve erro léxico
             System.out.println(parser.token_source.foundLexError() + " Lexical Errors found");
         else
             System.out.println("Program successfully analyzed.");
@@ -95,7 +95,7 @@ PARSER_END(langX)
 }
 
 
-/* Espa�os a serem desprezados no in�cio de cada token */
+/* Espaços a serem desprezados no início de cada token */
 
 SKIP :
 {
@@ -162,7 +162,7 @@ TOKEN :
 
 TOKEN :
 {
-    < int_constant:(  // n�meros decimais, octais, hexadecimais ou bin�rios
+    < int_constant:(  // n�meros decimais, octais, hexadecimais ou binários
             (["0"-"9"] (["0"-"9"])* ) | 
             (["0"-"7"] (["0"-"7"])* ["o", "O"] ) |
             (["0"-"9"] (["0"-"7","A"-"F","a"-"f"])* ["h", "H"] ) |
@@ -202,7 +202,7 @@ TOKEN :
         < #DIGIT:["0"-"9"] >
 }
 
-/* S�mbolos especiais */
+/* Símbolos especiais */
 
 TOKEN :
 {
@@ -240,7 +240,7 @@ TOKEN :
         | < NOT: "!" >
 }
 
-/* Trata os erros l�xicos */
+/* Trata os erros léxicos */
 SPECIAL_TOKEN :
 {
     <INVALID_LEXICAL: 
