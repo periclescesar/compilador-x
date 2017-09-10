@@ -308,6 +308,7 @@ void classlist():
    classdecl() [ classlist() ]
 }
 
+/* criado para definir os qualificadores das classes e atributos da classe */
 void qualificadordecl():
 {
 }
@@ -334,6 +335,7 @@ void classbody():
    <RBRACE>
 }
 
+/*Types foi definido para simplificar o código */
 void types():
 {
 }
@@ -344,9 +346,9 @@ void types():
 void vardecl():
 {
 }
-{
-  types() <IDENT> ( <LBRACKET> <RBRACKET>)* 
-  (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )*  
+{/* adicionado a atribuição para sempre poder declarar e iniciar uma variavel fora do método */
+  types() <IDENT> ( <LBRACKET> <RBRACKET>)* (<ASSIGN> ( alocexpression() | expression()))?
+  (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )* (<ASSIGN> ( alocexpression() | expression()))?
 }
 
 void constructdecl():
