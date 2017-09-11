@@ -9,7 +9,7 @@ Este programa é parte do livro "Construção de compiladores usando ferra..."
 ************************************************************************/
 options {
   STATIC = false;
-  DEBUG_LOOKAHEAD = true;
+  DEBUG_LOOKAHEAD = false;
 }
 
 PARSER_BEGIN(langX)
@@ -36,13 +36,8 @@ int contParseError = 0;           // contador de erros sintáticos
     // lê os parâmetros passados para o compilador
     for (i = 0; i < args.length - 1; i++)
     {
-    if (args[i].equals("-debug_AS") )
-            debug = true;
-    else
-        {
-            System.out.println("Usage is: java langX [-debug_AS] inputfile");
-            System.exit(0);
-        }
+    
+
     }
 
     if (args[i].equals("-"))
