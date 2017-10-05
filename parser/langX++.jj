@@ -188,6 +188,14 @@ TOKEN :
         |
         < #FALSE: "false" >
         |
+        < float_constant:(
+            ((["0"-"9"])* "." (["0"-"9"])+)
+            ) >
+        |
+        < byte_constant:(
+            (["0"-"9"] (["0"-"9"])* )  
+            ) >
+        |
         < null_constant: "null" > // constante null
 }
 
@@ -300,7 +308,7 @@ void classlist():
 {
 }
 {
-   classdecl() [ classlist() ]
+   classdecl() [LOOKAHEAD(1) classlist() ]
 }
 
 /* criado para definir os qualificadores das classes e atributos da classe */
@@ -308,7 +316,7 @@ void qualificadordecl():
 {
 }
 {
-    (<PUBLIC> | <PROTECTED> | <PRIVATE>)? (<FINAL>)?
+    ((<PUBLIC> | <PROTECTED> | <PRIVATE>)? (<FINAL>)?)
 }
 
 void classdecl():
@@ -323,8 +331,8 @@ void classbody():
 }
 {
    <LBRACE>
-      [classlist()]
-      (LOOKAHEAD(3) vardecl() <SEMICOLON>)*
+      [LOOKAHEAD(1) classlist()]
+      (LOOKAHEAD(3) qualificadordecl() vardecl() <SEMICOLON>)*
       (constructdecl())*
       (methoddecl())* 
    <RBRACE>
@@ -338,12 +346,19 @@ void types():
   (<BYTE> | <SHORT> | <INT> | <LONG> | <FLOAT> | <STRING> | <IDENT>) 
 }
 
+void assignment():
+{
+}
+{
+    <ASSIGN> (alocexpression() | expression())
+}
+
 void vardecl():
 {
 }
 {/* adicionado a atribuição para sempre poder declarar e iniciar uma variavel fora do método */
-  types() <IDENT> ( <LBRACKET> <RBRACKET>)* (<ASSIGN> ( alocexpression() | expression()))?
-  (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )* (<ASSIGN> ( alocexpression() | expression()))?
+  types() <IDENT> ( <LBRACKET> <RBRACKET>)* (LOOKAHEAD(1) assignment())?
+  (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )* (LOOKAHEAD(1) assignment())?
 }
 
 void constructdecl():
@@ -412,7 +427,7 @@ void atribstat():
 {
 }
 {
-    lvalue() <ASSIGN> ( alocexpression() | expression())
+    lvalue() assignment()
 }
 
 void printstat():
@@ -450,7 +465,7 @@ void ifstat():
 }
 {
     <IF> <LPAREN> expression() <RPAREN> statement()
-    [ <ELSE> statement()]
+    [LOOKAHEAD(1) <ELSE> statement()]
 }
 
 
@@ -533,6 +548,8 @@ void factor():
        <string_constant> | 
        <null_constant> |
        <bool_constant> |
+       <float_constant> | 
+       <byte_constant> | 
        lvalue() |
        <LPAREN> expression() <RPAREN>)
 }
