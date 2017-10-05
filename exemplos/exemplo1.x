@@ -4,7 +4,7 @@ class programateste01
 {
 	
     private byte variavel3=1;
-    private short variavel4=10;
+    short variavel4=10;
     long variavel5=10.1;
     float variavel1=7.0;
     float variavel2=10.1;
