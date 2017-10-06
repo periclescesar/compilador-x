@@ -157,6 +157,14 @@ TOKEN :
 | < STRING: "string" >
 | < SUPER: "super" >
 /*novos itens */
+| < WHILE: "while" >
+| < DO: "do" >
+| < SWITCH: "switch" >
+| < CASE: "case" >
+| < DEFAULTT: "default" >
+| < CHAR: "char" >
+| < DOUBLE: "double" >
+
 | < BYTE: "byte" >
 | < SHORT: "short" >
 | < LONG: "long" >
@@ -178,6 +186,9 @@ TOKEN :
             (["0"-"9"] (["0"-"7","A"-"F","a"-"f"])* ["h", "H"] ) |
             (["0"-"1"] (["0"-"1"])* ["b", "B"])
             ) >
+        |
+        < char_constant:
+        "'" (["a"-"f","A"-"F"] | <DIGIT>) "'" >
         |
         < string_constant:    // constante string como "abcd bcda"
         "\""( ~["\"","\n","\r"])* "\"" >
@@ -308,22 +319,14 @@ void classlist():
 {
 }
 {
-   classdecl() [LOOKAHEAD(1) classlist() ]
-}
-
-/* criado para definir os qualificadores das classes e atributos da classe */
-void qualificadordecl():
-{
-}
-{
-    ((<PUBLIC> | <PROTECTED> | <PRIVATE>)? (<FINAL>)?)
+   classdecl() [classlist() ]
 }
 
 void classdecl():
 {
 }
 {
-   qualificadordecl() <CLASS>  <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
+  <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
 }
 
 void classbody():
@@ -331,8 +334,8 @@ void classbody():
 }
 {
    <LBRACE>
-      [LOOKAHEAD(1) classlist()]
-      (LOOKAHEAD(3) qualificadordecl() vardecl() <SEMICOLON>)*
+      [classlist()]
+      (LOOKAHEAD(3) vardecl() <SEMICOLON>)*
       (constructdecl())*
       (methoddecl())* 
    <RBRACE>
@@ -343,7 +346,7 @@ void types():
 {
 }
 {
-  (<BYTE> | <SHORT> | <INT> | <LONG> | <FLOAT> | <STRING> | <IDENT>) 
+  (<BYTE> | <SHORT> | <INT> | <LONG> | <FLOAT> | <CHAR> | <STRING> | <IDENT>) 
 }
 
 void assignment():
@@ -373,7 +376,7 @@ void methoddecl():
 {
 }
 {
-   qualificadordecl() types() (<LBRACKET> <RBRACKET>)* 
+   types() (<LBRACKET> <RBRACKET>)* 
    <IDENT> methodbody()
 }
 
@@ -545,6 +548,7 @@ void factor():
    (<NOT>)? 
     ( 
        <int_constant> | 
+       <char_constant> |
        <string_constant> | 
        <null_constant> |
        <bool_constant> |
