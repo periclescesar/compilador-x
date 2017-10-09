@@ -1,7 +1,7 @@
 cd parser;
 rm *.class *.java;
 
-javacc langX++.jj;
+javacc -debug_parser langX++.jj;
 
 cd ..;
 javac parser/langX.java;
