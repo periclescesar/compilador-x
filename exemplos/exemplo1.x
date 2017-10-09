@@ -3,12 +3,12 @@
 class programateste01
 {
 	
+    char ch='a';
     byte variavel3=1;
     short variavel4=10;
     long variavel5=10.1;
     float variavel1=7.0;
     float variavel2=10.1;
-    char ch = 'a';
     string str = "ab";
 
     void calc() {
