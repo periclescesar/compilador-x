@@ -3,7 +3,7 @@
 class programateste01
 {
 	
-    char ch='a';
+    //char cwh='a';
     byte variavel3=1;
     short variavel4=10;
     long variavel5=10.1;
@@ -26,5 +26,13 @@ class programateste01
         if((variavel1 != 10) && (variavel2 == 50)){
             int variavel3 = 5;
         }
+
+        int i = 0;    
+        do 
+        i = i + 1; 
+        (i == 2)
+
+        //Colocar switch
+        //Colocar while
     }
 }

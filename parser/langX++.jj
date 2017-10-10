@@ -238,6 +238,7 @@ TOKEN :
     | < SEMICOLON: ";" >
     | < COMMA: "," >
     | < DOT: "." >
+    | < TODOT: ":" >
 }
 
 /* Operadores */
@@ -310,7 +311,7 @@ SPECIAL_TOKEN :
 
 }
 
-
+// A partir daqui o analisador sintático é construido
 
 void program() :
 {
@@ -357,7 +358,7 @@ void types():
 {
 }
 {
-  (<BYTE> | <SHORT> | <INT> | <LONG> | <FLOAT> | <CHAR> | <STRING> | <IDENT>) 
+  (<BYTE> | <SHORT> | <INT> | <LONG> | <FLOAT> | <DOUBLE> | <CHAR> | <STRING> | <IDENT>) 
 }
 
 void assignment():
@@ -429,6 +430,13 @@ void statement():
 |
     forstat() 
 |
+// Incluindo while, do while e switch case
+    whilestat()
+|
+    dowhilestat()
+|
+    switchstat()
+|
     <LBRACE> statlist() <RBRACE> 
 |
     <BREAK> <SEMICOLON>
@@ -493,6 +501,34 @@ void forstat():
                    [atribstat()] <RPAREN>
                     statement()
 }
+
+void whilestat():
+{
+}
+{
+  <WHILE><LPAREN> expression() <RPAREN> statement()
+}
+void dowhilestat():
+{ 
+}
+{
+  <DO> statement() <LPAREN> expression() <RPAREN>
+}
+
+void switchstat():
+{
+}
+{
+  <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchcasestat() <RBRACE>
+}
+
+void switchcasestat():
+{
+}
+{
+  (<CASE> factor() | <DEFAULTT>) <TODOT> statement()
+}
+
 
 void  statlist() :
 {
