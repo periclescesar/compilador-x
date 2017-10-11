@@ -1,11 +1,11 @@
 /*************************************************************************
   Arquivo a ser processado pelo programa JavaCC.
-  ContÈm:
-  - descriÁ„o do analisador lÈxico para a linguagem X++ 
-  - descriÁ„o do analisador sint·tico para a linguagem X++
+  Cont√©m:
+  - descri√ß√£o do analisador l√©xico para a linguagem X++ 
+  - descri√ß√£o do analisador sint√°tico para a linguagem X++
 
-Autor: Francisco Teixeira, Marcelo Ecker e PÈricles Cesar da Costa
-Este programa È parte do livro "ConstruÁ„o de compiladores usando ferra..."
+Autor: Francisco Teixeira, Marcelo Ecker e P√©ricles Cesar da Costa
+Este programa √© parte do livro "Constru√ß√£o de compiladores usando ferra..."
  ************************************************************************/
 options {
     STATIC = false;
@@ -21,21 +21,21 @@ PARSER_BEGIN(langX)
 
     public class langX {
         final static String Version = "X++ Compiler - Version 1.0 - 2004";
-        int contParseError = 0;           // contador de erros sint·ticos
+        int contParseError = 0;           // contador de erros sint√°ticos
 
 
-        // Define o mÈtodo "main" da classe langX.  
+        // Define o m√©todo "main" da classe langX.  
         public  static void main(String args[]) throws ParseException 
         {
             boolean debug = false;
 
             String filename = ""; // nome do arquivo a ser analisado
-            langX parser;     // analisador lÈxico/sint·tico
+            langX parser;     // analisador l√©xico/sint√°tico
             int i;
             boolean ms = false;
 
             System.out.println(Version);
-            // lÍ os par‚metros passados para o compilador
+            // l√™ os par√¢metros passados para o compilador
             for (i = 0; i < args.length - 1; i++)
             {
 
@@ -43,12 +43,12 @@ PARSER_BEGIN(langX)
             }
 
             if (args[i].equals("-"))
-            {       // lÍ da entrada padr„o      
+            {       // l√™ da entrada padr√£o      
                 System.out.println("Reading from standard input . . .");
                 parser = new langX(System.in); // cria AS
             }
             else 
-            {       // lÍ do arquivo
+            {       // l√™ do arquivo
                 filename = args[args.length-1];  
                 System.out.println("Reading from file " + filename + " . . .");
                 try {  // cria AS
@@ -63,12 +63,12 @@ PARSER_BEGIN(langX)
             if (! debug) parser.disable_tracing(); // desabilita verbose do AS
 
             try {
-                parser.program();   // chama o mÈtodo que faz a an·lise
+                parser.program();   // chama o m√©todo que faz a an√°lise
             }
             catch (ParseException e)
             {
                 System.err.println(e.getMessage());
-                parser.contParseError = 1;   // n„o existe recuperaÁ„o de erros
+                parser.contParseError = 1;   // n√£o existe recupera√ß√£o de erros
             }
             finally {
                 System.out.println(parser.token_source.foundLexError() +
@@ -187,7 +187,7 @@ TOKEN :
     < short_constant: (<DIGIT>)+ >
     |
     < int_constant:(  
-            ( (<DIGIT>)+ ) // n˙meros decimais 
+            ( (<DIGIT>)+ ) // n√∫meros decimais 
             | (["0"-"7"] (["0"-"7"])* ["o", "O"] ) // octais 
             | ((<DIGIT> | ["A"-"F","a"-"f"])* ["h", "H"] ) //Hexadecimais 
             | (["0"-"1"] (["0"-"1"])* ["b", "B"]) // binarios
@@ -264,7 +264,7 @@ TOKEN :
   | < NOT: "!">
 }
 
-/* Trata os erros lÈxicos */
+/* Trata os erros l√©xicos */
 SPECIAL_TOKEN :
 {
     <INVALID_LEXICAL: 
@@ -311,7 +311,7 @@ SPECIAL_TOKEN :
 
 }
 
-// A partir daqui o analisador sint·tico È construido
+// A partir daqui o analisador sint√°tico √© construido
 
 void program() :
 {
@@ -353,7 +353,7 @@ void modifaccess():
     ( <PUBLIC> | <PROTECTED> | <PRIVATE> ) (<FINAL>)?
 }
 
-/*Types foi definido para simplificar o cÛdigo */
+/*Types foi definido para simplificar o c√≥digo */
 void types():
 {
 }
@@ -371,7 +371,7 @@ void assignment():
 void vardecl():
 {
 }
-{/* adicionado a atribuiÁ„o para sempre poder declarar e iniciar uma variavel fora do mÈtodo */
+{/* adicionado a atribui√ß√£o para sempre poder declarar e iniciar uma variavel fora do m√©todo */
   types() <IDENT> ( <LBRACKET> <RBRACKET>)* (LOOKAHEAD(1) assignment())?
   (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )* (LOOKAHEAD(1) assignment())?
 }
@@ -433,7 +433,7 @@ void statement():
 // Incluindo while, do while e switch case
     whilestat()
 |
-    dowhilestat()
+    dowhilestat() <SEMICOLON>
 |
     switchstat()
 |
