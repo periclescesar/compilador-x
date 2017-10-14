@@ -430,10 +430,9 @@ void statement():
 |
     forstat() 
 |
-// Incluindo while, do while e switch case
     whilestat()
 |
-    dowhilestat() <SEMICOLON>
+    dowhilestat()
 |
     switchstat()
 |
@@ -506,13 +505,14 @@ void whilestat():
 {
 }
 {
-  <WHILE><LPAREN> expression() <RPAREN> statement()
+  <WHILE> <LPAREN> expression() <RPAREN> statement()
 }
+
 void dowhilestat():
 { 
 }
 {
-  <DO> statement() <LPAREN> expression() <RPAREN>
+  <DO> statement() <LPAREN> expression() <RPAREN> <SEMICOLON>
 }
 
 void switchstat():

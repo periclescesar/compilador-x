@@ -10,29 +10,46 @@ class programateste01
     float variavel1=7.0;
     float variavel2=10.1;
     string str = "ab";
+    int idade = 0; 
+    int cont;
+    int cont2;
+    string genero;
+   
 
-    void calc() {
-
-        int cont;
-        for (cont = 0; cont < variavel1; cont = (cont + 1))
-        {
-            int cont2;
+    void calcFor() {
+        for (cont = 0; cont < variavel1; cont = (cont + 1)) {
             for(cont2 = 0; cont2 < variavel2; cont2 = (cont2 + 1))
-            {
-                int variavel4 = 2;
-            }
+                {
+                    variavel4 = 2;
+                }        
         }
+    }
 
+    void calcIf(){
         if((variavel1 != 10) && (variavel2 == 50)){
             int variavel3 = 5;
         }
-
-        int i = 0;    
-        do 
-        i = i + 1; 
-        (i == 2)
-
-        //Colocar switch
-        //Colocar while
     }
+
+    
+    //void calcDoWhile(){
+        //do
+        //    genero = "mulher";
+        //    (idade<50);
+    //}
+
+    void CalcWhile(){
+        while (idade != 50)
+            genero = "homem";
+    }
+
+    void calcSwitchCase(){
+
+    }
+
+    void declararVariavelInterna(){
+
+    }
+
+
 }
