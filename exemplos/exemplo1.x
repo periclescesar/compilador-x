@@ -32,23 +32,49 @@ class programateste01
     }
 
     
-    //void calcDoWhile(){
-        //do
-        //    genero = "mulher";
-        //    (idade<50);
-    //}
+    void calcDoWhile(){
+        do
+            genero = "mulher";
+           (idade<50);
+    }
 
     void CalcWhile(){
         while (idade != 50)
             genero = "homem";
     }
 
-    void calcSwitchCase(){
-
+    void calcSwitchCase(string abc){
+        switch(abc){
+        case "abc": 
+            print("Ordem lexixografica");
+        case "123":
+            print("Ordem crescente");
+        default:
+            print("Outra ordem");
+         }
     }
 
-    void declararVariavelInterna(){
+    void operadores(){
+        if((genero == "homem") || (genero =="mulher"))
+            print("Dois generos");
+        else
+            print("Outros");
+        
 
+        boolean isHomem = true;
+        if(!isHomem){
+            print("Mulher");
+            print("...");
+            print("...");
+        } else{
+            print("");
+            print("");
+            print("");
+        }
+
+        if(isHomem ^ (genero == "homem")){
+            print("Definitivamente é homem");
+        }
     }
 
 

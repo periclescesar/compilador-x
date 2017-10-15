@@ -10,14 +10,11 @@ Este programa é parte do livro "Construção de compiladores usando ferra..."
 options {
     STATIC = false;
     DEBUG_LOOKAHEAD = true;
-    DEBUG_TOKEN_MANAGER=true;
-    DEBUG_PARSER=true;
 }
 
 PARSER_BEGIN(langX)
     package parser;
     import java.io.*;
-
 
     public class langX {
         final static String Version = "X++ Compiler - Version 1.0 - 2004";
@@ -36,21 +33,24 @@ PARSER_BEGIN(langX)
 
             System.out.println(Version);
             // lê os parâmetros passados para o compilador
-            for (i = 0; i < args.length - 1; i++)
-            {
-
-
+            for (i = 0; i < args.length - 1; i++){
+               if (args[i].equals("-debug_AS"))
+                  debug = true;
+              else {
+                  System.out.println("Uso: java langX [-short] arquivo");
+                  System.exit(0);
+              }
             }
 
             if (args[i].equals("-"))
             {       // lê da entrada padrão      
-                System.out.println("Reading from standard input . . .");
+                System.out.println("Lendo a entrada padrão . . .");
                 parser = new langX(System.in); // cria AS
             }
             else 
             {       // lê do arquivo
                 filename = args[args.length-1];  
-                System.out.println("Reading from file " + filename + " . . .");
+                System.out.println("Lendo o arquivo " + filename + " . . .");
                 try {  // cria AS
                     parser = new langX(new java.io.FileInputStream(filename));
                 } 
@@ -60,7 +60,7 @@ PARSER_BEGIN(langX)
                 }
             } 
 
-            if (! debug) parser.disable_tracing(); // desabilita verbose do AS
+            if (!debug) parser.disable_tracing(); // desabilita verbose do AS
 
             try {
                 parser.program();   // chama o método que faz a análise
@@ -72,8 +72,8 @@ PARSER_BEGIN(langX)
             }
             finally {
                 System.out.println(parser.token_source.foundLexError() +
-                        " Lexical Errors found");
-                System.out.println(parser.contParseError + " Syntactic Errors found");
+                        " erros léxico encontrados");
+                System.out.println(parser.contParseError + "erros sintáticos encontrados");
             }
 
         }  // main
@@ -383,7 +383,7 @@ void constructdecl():
     <CONSTRUCTOR> methodbody()
 }
 
-
+//TO DO: é precioso inclur public, final, private....
 void methoddecl():
 {
 }
@@ -519,14 +519,21 @@ void switchstat():
 {
 }
 {
-  <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchcasestat() <RBRACE>
+    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> [switchcasesstat()] <RBRACE>
+}
+
+void switchcasesstat():
+{
+}
+{
+    switchcasestat() [switchcasesstat()]
 }
 
 void switchcasestat():
 {
 }
 {
-  (<CASE> factor() | <DEFAULTT>) <TODOT> statement()
+    ( <CASE> factor() | <DEFAULTT> ) <TODOT> statement()
 }
 
 
