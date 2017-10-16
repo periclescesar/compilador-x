@@ -340,7 +340,7 @@ void classbody():
 {
    <LBRACE>
       [classlist()]
-      (LOOKAHEAD(3) vardecl() <SEMICOLON>)*
+      (LOOKAHEAD(3) [modifaccess()] [<FINAL>] vardecl() <SEMICOLON>)*
       (constructdecl())*
       (methoddecl())* 
    <RBRACE>
@@ -350,7 +350,7 @@ void modifaccess():
 {
 }
 {
-    ( <PUBLIC> | <PROTECTED> | <PRIVATE> ) (<FINAL>)?
+    ( <PUBLIC> | <PROTECTED> | <PRIVATE> ) 
 }
 
 /*Types foi definido para simplificar o código */

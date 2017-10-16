@@ -4,10 +4,10 @@ class programateste01
 {
 	
     //char cwh='a';
-    byte variavel3=1;
-    short variavel4=10;
-    long variavel5=10.1;
-    float variavel1=7.0;
+    final byte variavel3=1;
+    private final short variavel4=10;
+    public long variavel5=10.1;
+    protected float variavel1=7.0;
     float variavel2=10.1;
     string str = "ab";
     int idade = 0; 
