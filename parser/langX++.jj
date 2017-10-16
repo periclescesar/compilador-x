@@ -331,7 +331,7 @@ void classdecl():
 {
 }
 {
-  <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
+  modifs() <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
 }
 
 void classbody():
@@ -339,18 +339,25 @@ void classbody():
 }
 {
    <LBRACE>
-      [classlist()]
-      (LOOKAHEAD(3) [modifaccess()] [<FINAL>] vardecl() <SEMICOLON>)*
+      [LOOKAHEAD(2) classlist()]
+      (LOOKAHEAD(4) modifs() vardecl() <SEMICOLON>)*
       (constructdecl())*
-      (methoddecl())* 
+      (LOOKAHEAD(4) modifs() methoddecl())* 
    <RBRACE>
 }
 
-void modifaccess():
+void modifvisibility():
 {
 }
 {
     ( <PUBLIC> | <PROTECTED> | <PRIVATE> ) 
+}
+
+void modifs():
+{
+}
+{
+    [modifvisibility()] [<FINAL>]
 }
 
 /*Types foi definido para simplificar o código */
