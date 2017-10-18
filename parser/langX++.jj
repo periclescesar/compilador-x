@@ -313,6 +313,7 @@ SPECIAL_TOKEN :
 
 // A partir daqui o analisador sintático é construido
 
+
 void program() :
 {
 }
@@ -324,7 +325,7 @@ void classlist():
 {
 }
 {
-   classdecl() [classlist() ]
+   classdecl() [LOOKAHEAD(2) classlist()]
 }
 
 void classdecl():
