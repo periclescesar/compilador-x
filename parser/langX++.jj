@@ -21,13 +21,14 @@ PARSER_BEGIN(langX)
     public class langX {
         final static String Version = "X++ Compiler - Version 1.0 - 2004";
         int contParseError = 0;           // contador de erros sintáticos
-        boolean debug_recovey;
-        TOken lastError = null
+        boolean debug_recovery;
+        Token lastError = null;
 
-        // Define o método "main" da classe langX.  
-        public  static void main(String args[]) throws ParseException 
+        // Define o método "main" da classe langX  
+        public static void main(String args[]) throws ParseException 
         {
-            boolean debug = false;
+            boolean debug_as = false;
+            boolean debug_recovery = false;
 
             String filename = ""; // nome do arquivo a ser analisado
             langX parser;     // analisador léxico/sintático
@@ -37,15 +38,17 @@ PARSER_BEGIN(langX)
             System.out.println(Version);
             // lê os parâmetros passados para o compilador
             for (i = 0; i < args.length - 1; i++){
-               if (args[i].equals("-debug_AS"))
-                  debug = true;
-	       else		
-	       	if (args[i].equals("-debug_recovery") )		
-	            debug_recovery = true
-                else {
-                  System.out.println("Uso: java langX [-short] arquivo");
-                  System.exit(0);
-              }
+               if(args[i].equals("-debug_AS") )
+                  debug_as = true;
+              else
+              if(args[i].equals("-debug_recovery") )
+                debug_recovery = true;
+              else
+              {
+                System.out.println("Usage is: java langX [-debug_AS] " +
+                 "[-debug_recovery] inputfile");
+                System.exit(0);
+               }
             }
 
             if (args[i].equals("-"))
@@ -66,7 +69,8 @@ PARSER_BEGIN(langX)
                 }
             } 
 
-            if (!debug) parser.disable_tracing(); // desabilita verbose do AS
+            parser.debug_recovery = debug_recovery;
+            if (!debug_as) parser.disable_tracing(); // desabilita verbose do AS
 
             try {
                 parser.program();   // chama o método que faz a análise
@@ -389,7 +393,7 @@ RecoverySet g = First.program;
    [ program() ]    
 }
 
-void classlist(coverySet g) throws ParseEOFException :
+void classlist(RecoverySet g) throws ParseEOFException :
 {
 RecoverySet f = First.classlist.union(g);
 }
@@ -397,12 +401,12 @@ RecoverySet f = First.classlist.union(g);
    classdecl(f) [LOOKAHEAD(2) classlist(g)]
 }
 
-void classdecl(RecoverySet g) throws ParseEOFException
+void classdecl(RecoverySet g) throws ParseEOFException :
 {
 }
 {
   try {
-    modifs() <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody() 
+    modifs() <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody(g) 
   }catch(ParseException e){
     consumeUntil(g, e, "classdecl");
   }
@@ -495,10 +499,11 @@ catch (ParseException e)
 //TO DO: é precioso inclur public, final, private....
 void methoddecl(RecoverySet g) throws ParseEOFException:
 {
+RecoverySet f = new RecoverySet(IDENT).union(g);
 }
 {
   try {
-   types() (<LBRACKET> <RBRACKET>)* 
+   types(f) (<LBRACKET> <RBRACKET>)* 
    <IDENT> methodbody(g)
   }
   catch (ParseException e)
@@ -526,12 +531,13 @@ catch (ParseException e)
 
 void paramlist(RecoverySet g) throws ParseEOFException :
 {
+RecoverySet f1 = new RecoverySet(IDENT).union(g);
 }
 {
 try {
    [
-    types() <IDENT> (<LBRACKET> <RBRACKET>)* 
-    (<COMMA> types() <IDENT> (<LBRACKET> <RBRACKET>)* )*
+    types(f1) <IDENT> (<LBRACKET> <RBRACKET>)* 
+    (<COMMA> types(f1) <IDENT> (<LBRACKET> <RBRACKET>)* )*
    ]
 }
 catch (ParseException e)
@@ -548,29 +554,29 @@ RecoverySet f2 = new RecoverySet(RBRACE).union(g).remove(IDENT);
 {
 try {
     LOOKAHEAD(4)
-    vardecl() <SEMICOLON>
+    vardecl(f1) <SEMICOLON>
 |
-    atribstat() <SEMICOLON> 
+    atribstat(f1) <SEMICOLON> 
 |
-    printstat() <SEMICOLON>
+    printstat(f1) <SEMICOLON>
 |
-    readstat() <SEMICOLON>
+    readstat(f1) <SEMICOLON>
 |
-    returnstat() <SEMICOLON>
+    returnstat(f1) <SEMICOLON>
 |
-    superstat() <SEMICOLON>
+    superstat(f1) <SEMICOLON>
 |
-    ifstat() 
+    ifstat(g) 
 |
-    forstat() 
+    forstat(g) 
 |
-    whilestat()
+    whilestat(g)
 |
-    dowhilestat()
+    dowhilestat(g)
 |
-    switchstat()
+    switchstat(g)
 |
-    <LBRACE> statlist() <RBRACE> 
+    <LBRACE> statlist(f2) <RBRACE> 
 |
     <BREAK> <SEMICOLON>
 |
@@ -717,10 +723,11 @@ catch (ParseException e)
 
 void switchstat(RecoverySet g) throws ParseEOFException:
 {
+RecoverySet f = new RecoverySet(RBRACE).union(g);
 }
 {
 try{
-    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> [switchcasesstat(g)] <RBRACE>
+    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> [switchcasesstat(f)] <RBRACE>
 }
 catch (ParseException e)
 {
@@ -746,7 +753,7 @@ void switchcasestat(RecoverySet g) throws ParseEOFException:
 RecoverySet f1 = new RecoverySet(TODOT).union(g);
 }
 {
-    ( <CASE> factor(f1) | <DEFAULTT> ) <TODOT> statement(g)
+    ( <CASE> factor() | <DEFAULTT> ) <TODOT> statement(g)
 }
 
 
@@ -764,8 +771,8 @@ void lvalue(RecoverySet g) throws ParseEOFException :
 {
 try {
    <IDENT> (
-           <LBRACKET> expression() <RBRACKET> |
-           <DOT> <IDENT> [<LPAREN> arglist() <RPAREN>]
+           <LBRACKET> expression(null) <RBRACKET> |
+           <DOT> <IDENT> [<LPAREN> arglist(null) <RPAREN>]
          )*
 }
 catch (ParseException e)
@@ -782,7 +789,7 @@ RecoverySet f1 = new RecoverySet(RPAREN).union(g),
 {
     <NEW> ( 
              LOOKAHEAD(2) <IDENT> <LPAREN> arglist(f1) <RPAREN> | 
-             types()
+             types(g)
              (<LBRACKET> expression(f2) <RBRACKET>)+
           )
 } 
@@ -837,7 +844,7 @@ void factor() throws ParseEOFException :
        <string_constant> | 
        <bool_constant> |
        <null_constant> |
-       lvalue() |
+       lvalue(null) |
        <LPAREN> expression(null) <RPAREN>)
 }
 
