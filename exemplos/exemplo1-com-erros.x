@@ -2,14 +2,14 @@
 
 public class programateste01
 {
-    final private class {
+    private final class{
     
     }
 
-    cwh='a';
-    byte final variavel3=1;
-    private final short variavel4=10
-    protected 10.1;
+    char='a';
+    final byte variavel3=1;
+    private final short variavel4=10;
+    protected long variavel5=10.1;
     public float variavel1=7.0;
     float variavel2=10.1;
     string str = "ab";
@@ -18,45 +18,45 @@ public class programateste01
     int cont2;
     string genero;
 
-    public calcFor() {
-        for (cont = 0; ; cont = (cont + 1)) {
-            for(cont2 < variavel2; cont2 = (cont2 + 1))
+    public void calcFor() {
+        for (cont = 0; cont < variavel1; cont = (cont + 1)) {
+            for(cont2 = 0; cont2 < variavel2; cont2 = (cont2 + 1))
             {
                 variavel4 = 2;
             }        
         }
     }
 
-    private void (){
-        if((variavel1 10) && ( = 50)){
+    private void calcIf(){
+        if((variavel1 != 10) && (variavel2 == 50)){
             int variavel3 = 5;
         }
 
-        if () {
-            if (() > 4) {
+        if (true) {
+            if ((1+2) > 4) {
                 print("1+2 é maior que 4");    
             } else {
                 print("1+2 NÃO é maior que 4");    
             }
-        } {
+        } else {
                 print("Não verdadeiro!");    
         }
     }
 
     protected final void calcDoWhile(){
-
+        do
             genero = "mulher";
         (idade<50);
     }
 
     public int CalcWhile(){
-        while (idade != 50
+        while (idade != 50)
             genero = "homem";
     }
 
     void calcSwitchCase(string abc){
         switch(abc){
-            case : 
+            case "abc": 
                 print("Ordem lexixografica");
             case "123":
                 print("Ordem crescente");
@@ -66,7 +66,7 @@ public class programateste01
     }
 
     void operadores(){
-        if((genero == "homem") (genero =="mulher"))
+        if((genero == "homem") || (genero =="mulher"))
             print("Dois generos");
         else
             print("Outros");
@@ -83,7 +83,7 @@ public class programateste01
             print("");
         }
 
-        if(isHomem ^ (genero "homem")){
+        if(isHomem ^ (genero == "homem")){
             print("Definitivamente é homem");
         }
 
@@ -91,4 +91,6 @@ public class programateste01
             print("2 é menor q 1+2");    
         }
     }
+
+
 }

@@ -322,7 +322,6 @@ TOKEN :
   | < XOR: "^">
   | < NOT: "!">
 }
-
 /* Trata os erros léxicos */
 SPECIAL_TOKEN :
 {
@@ -403,10 +402,11 @@ RecoverySet f = First.classlist.union(g);
 
 void classdecl(RecoverySet g) throws ParseEOFException :
 {
+RecoverySet f = new RecoverySet(CLASS).union(g);
 }
 {
   try {
-    modifs() <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody(g) 
+    modifs(f) <CLASS> <IDENT> [ <EXTENDS> <IDENT> ] classbody(g) 
   }catch(ParseException e){
     consumeUntil(g, e, "classdecl");
   }
@@ -415,17 +415,17 @@ void classdecl(RecoverySet g) throws ParseEOFException :
 void classbody(RecoverySet g) throws ParseEOFException:
 {
 RecoverySet f2 = new RecoverySet(SEMICOLON).union(g).remove(IDENT),
-            f3 = First.methoddecl.union(g).remove(IDENT),
-            f4 = First.constructdecl.union(f3).remove(IDENT),
-            f5 = First.vardecl.union(f4).remove(IDENT);                         
+            f3 = First.methoddecl.union(g).union(f2).remove(IDENT),
+            f4 = First.constructdecl.union(f3).union(f2).remove(IDENT),
+            f5 = First.vardecl.union(f4).union(f2).remove(IDENT);                     
 }
 {
   try {
-   <LBRACE>
+    <LBRACE>
       [LOOKAHEAD(2) classlist(f5)]
-      (LOOKAHEAD(4) modifs() vardecl(f4) <SEMICOLON>)*
+      (LOOKAHEAD(4) modifs(g) vardecl(f2) <SEMICOLON>)*
       (constructdecl(f4))*
-      (LOOKAHEAD(4) modifs() methoddecl(f3))* 
+      (LOOKAHEAD(4) modifs(g) methoddecl(f3))* 
    <RBRACE>
    }catch (ParseException e)
    {
@@ -433,18 +433,18 @@ RecoverySet f2 = new RecoverySet(SEMICOLON).union(g).remove(IDENT),
    }
 }
 
-void modifvisibility():
+void modifvisibility(RecoverySet g) throws ParseEOFException:
 {
 }
 {
     ( <PUBLIC> | <PROTECTED> | <PRIVATE> ) 
 }
 
-void modifs():
+void modifs(RecoverySet g) throws ParseEOFException:
 {
 }
 {
-    [modifvisibility()] [<FINAL>]
+     [modifvisibility(g)] [<FINAL>]
 }
 
 /*Types foi definido para simplificar o código */

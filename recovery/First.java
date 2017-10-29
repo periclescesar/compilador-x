@@ -26,9 +26,8 @@ public class First { //implementa os conjuntos first p/ alguns n.terminais
         methoddecl.add(new Integer(langXConstants.FLOAT));
         methoddecl.add(new Integer(langXConstants.FINAL));
         methoddecl.add(new Integer(langXConstants.PRIVATE));
+        methoddecl.add(new Integer(langXConstants.PUBLIC));
         methoddecl.add(new Integer(langXConstants.PROTECTED));
-        methoddecl.add(new Integer(langXConstants.BOOL));
-
 
         vardecl.add(new Integer(langXConstants.INT));
         vardecl.add(new Integer(langXConstants.STRING));
@@ -40,7 +39,10 @@ public class First { //implementa os conjuntos first p/ alguns n.terminais
         vardecl.add(new Integer(langXConstants.LONG));
         vardecl.add(new Integer(langXConstants.FLOAT));
         vardecl.add(new Integer(langXConstants.BOOL));
-
+        vardecl.add(new Integer(langXConstants.FINAL));
+        vardecl.add(new Integer(langXConstants.PRIVATE));
+        vardecl.add(new Integer(langXConstants.PUBLIC));
+        vardecl.add(new Integer(langXConstants.PROTECTED));
 
         classlist.add(new Integer(langXConstants.CLASS));
 
