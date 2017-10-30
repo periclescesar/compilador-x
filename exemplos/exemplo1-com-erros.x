@@ -2,11 +2,11 @@
 
 public class programateste01
 {
-    private final class{
+    private final class {
     
     }
 
-    char='a';
+    char cwh='a';
     final byte variavel3=1;
     private final short variavel4=10;
     protected long variavel5=10.1;
@@ -50,13 +50,13 @@ public class programateste01
     }
 
     public int CalcWhile(){
-        while (idade != 50)
+        (idade != 50)
             genero = "homem";
     }
 
     void calcSwitchCase(string abc){
         switch(abc){
-            case "abc": 
+            case: 
                 print("Ordem lexixografica");
             case "123":
                 print("Ordem crescente");
@@ -87,7 +87,7 @@ public class programateste01
             print("Definitivamente é homem");
         }
 
-        if (2 < (1+2)) {
+        if (2 < (1+2)){
             print("2 é menor q 1+2");    
         }
     }

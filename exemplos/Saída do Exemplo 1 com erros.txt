@@ -1,0 +1,250 @@
+Saída do Exemplo 1 com erros
+
+X++ Compiler - Version 1.0 - 2004
+Lendo o arquivo exemplos/exemplo1-com-erros.x . . .
+
+*** classdecl ***
+     Syncronizing Set: double byte short long float final public private protected bool class constructor int string char ; 
+     Ignoring token: {
+     Ignoring token: }
+     Found syncronizing token: char
+Encountered " "{" "{ "" at line 5, column 25.
+Was expecting:
+    <IDENT> ...
+    
+
+*** statement ***
+     Syncronizing Set: break class for if int print read return string super while do switch case default char double byte short long float final public private protected bool { } ; 
+     Ignoring token: (
+     Ignoring token: <IDENT>
+     Ignoring token: !=
+     Ignoring token: <byte_constant>
+     Ignoring token: )
+     Ignoring token: <IDENT>
+     Ignoring token: =
+     Ignoring token: <string_constant>
+     Found syncronizing token: ;
+Encountered " "(" "( "" at line 53, column 9.
+Was expecting one of:
+    "break" ...
+    "for" ...
+    "if" ...
+    "print" ...
+    "read" ...
+    "return" ...
+    "super" ...
+    "while" ...
+    "do" ...
+    "switch" ...
+    <IDENT> ...
+    "{" ...
+    ";" ...
+    "byte" ...
+    "short" ...
+    "int" ...
+    "long" ...
+    "float" ...
+    "double" ...
+    "char" ...
+    "string" ...
+    
+
+*** switchcasestat ***
+     Syncronizing Set: break class for if int print read return string super while do switch case default char double byte short long float final public private protected bool { } ; 
+     Ignoring token: :
+     Found syncronizing token: print
+Encountered " ":" ": "" at line 59, column 17.
+Was expecting one of:
+    <byte_constant> ...
+    <int_constant> ...
+    <float_constant> ...
+    <double_constant> ...
+    <char_constant> ...
+    <string_constant> ...
+    <bool_constant> ...
+    "null" ...
+    <IDENT> ...
+    "(" ...
+    "!" ...
+    
+
+*** switchstat ***
+     Syncronizing Set: break class for if int print read return string super while do switch case default char double byte short long float final public private protected bool { } ; 
+     Found syncronizing token: print
+
+*** statement ***
+     Syncronizing Set: double byte short long float final public private protected class int string char ; 
+     Ignoring token: case
+     Ignoring token: <string_constant>
+     Ignoring token: :
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Found syncronizing token: ;
+Encountered " "case" "case "" at line 61, column 13.
+Was expecting one of:
+    "break" ...
+    "for" ...
+    "if" ...
+    "int" ...
+    "print" ...
+    "read" ...
+    "return" ...
+    "string" ...
+    "super" ...
+    "while" ...
+    "do" ...
+    "switch" ...
+    "char" ...
+    "double" ...
+    "byte" ...
+    "short" ...
+    "long" ...
+    "float" ...
+    <IDENT> ...
+    "{" ...
+    "}" ...
+    ";" ...
+    
+
+*** classbody ***
+     Syncronizing Set: class 
+     Ignoring token: ;
+     Ignoring token: default
+     Ignoring token: :
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: }
+     Ignoring token: }
+     Ignoring token: <IDENT>
+     Ignoring token: <IDENT>
+     Ignoring token: (
+     Ignoring token: )
+     Ignoring token: {
+     Ignoring token: if
+     Ignoring token: (
+     Ignoring token: (
+     Ignoring token: <IDENT>
+     Ignoring token: ==
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ||
+     Ignoring token: (
+     Ignoring token: <IDENT>
+     Ignoring token: ==
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: )
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: else
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: <IDENT>
+     Ignoring token: <IDENT>
+     Ignoring token: =
+     Ignoring token: <bool_constant>
+     Ignoring token: ;
+     Ignoring token: if
+     Ignoring token: (
+     Ignoring token: !
+     Ignoring token: <IDENT>
+     Ignoring token: )
+     Ignoring token: {
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: }
+     Ignoring token: else
+     Ignoring token: {
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: }
+     Ignoring token: if
+     Ignoring token: (
+     Ignoring token: <IDENT>
+     Ignoring token: ^
+     Ignoring token: (
+     Ignoring token: <IDENT>
+     Ignoring token: ==
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: )
+     Ignoring token: {
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: }
+     Ignoring token: if
+     Ignoring token: (	
+     Ignoring token: <byte_constant>
+     Ignoring token: +
+     Ignoring token: <byte_constant>
+     Ignoring token: )
+     Ignoring token: )
+     Ignoring token: {
+     Ignoring token: print
+     Ignoring token: (
+     Ignoring token: <string_constant>
+     Ignoring token: )
+     Ignoring token: ;
+     Ignoring token: }
+     Ignoring token: }
+     Ignoring token: }
+Encountered " ";" "; "" at line 62, column 41.
+Was expecting one of:
+    "}" ...
+    "public" ...
+    "protected" ...
+    "private" ...
+    "final" ...
+    "byte" ...
+    "short" ...
+    "int" ...
+    "long" ...
+    "float" ...
+    "double" ...
+    "char" ...
+    "string" ...
+    <IDENT> ...
+    
+EOF found prematurely.
+0 erros léxico encontrados
+5erros sintáticos encontrados
