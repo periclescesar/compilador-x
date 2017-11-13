@@ -5,3 +5,4 @@
 *.java
 *.tags
 *.swo
+!recovery/*
