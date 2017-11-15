@@ -6,3 +6,4 @@
 *.tags
 *.swo
 !recovery/*
+!syntacticTree/*
