@@ -709,12 +709,12 @@ RecoverySet f1 = new RecoverySet(ASSIGN).union(g);
 {
 try {
     e1 = lvalue(f1) t1 = assignment(g)
-    { return new AtribNode(t1, e1); }
+    { return new AtribNode(t1, e1, e2); }
 }
 catch (ParseException e)
 {
    consumeUntil(g, e, "atribstat");
-   return new AtribNode(t1, e1);
+   return new AtribNode(t1, e1, e2);
 }
 
 }
@@ -929,7 +929,7 @@ StatementNode s3 = null;
 ExpreNode e1 = null;
 Token t = null;
 
-RecoverySet f1 = new RecoverySet(TODOT).union(g);
+RecoverySet f1 = First.switchcasesstat.union(g);
 }
 {
     ( t = <CASE> e1 = factor() | <DEFAULTT> ) <TODOT> s3 = statement(g)
