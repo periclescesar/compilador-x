@@ -7,3 +7,9 @@
 *.swo
 !recovery/*
 !syntacticTree/*
+pom.xml
+recovery/*.class
+syntacticTree/*.class
+.classpath
+.project
+.settings/
