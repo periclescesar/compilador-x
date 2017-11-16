@@ -5,6 +5,8 @@
 *.java
 *.tags
 *.swo
+.project
+.classpath
 !recovery/*
 !syntacticTree/*
 pom.xml
