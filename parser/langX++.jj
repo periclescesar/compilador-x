@@ -425,11 +425,12 @@ ClassDeclNode classdecl(RecoverySet g) throws ParseEOFException :
 {
 RecoverySet f = new RecoverySet(CLASS).union(g);
 Token t = null, n = null, e1 = null, t2 = null;
+ModifsNode mn = null;
 ClassBodyNode c = null;
 }
 {
   try {
-    t2 = modifs(f) t = <CLASS>  n = <IDENT> [ <EXTENDS> e1 =<IDENT> ] c = classbody(g) { return new ClassDeclNode(t, n, e1, c); }
+    mn = modifs(f) t = <CLASS>  n = <IDENT> [ <EXTENDS> e1 =<IDENT> ] c = classbody(g) { return new ClassDeclNode(t, n, e1, c); }
   }catch(ParseException e){
     consumeUntil(g, e, "classdecl");
     return new ClassDeclNode(t, n, e1, c);
@@ -446,6 +447,7 @@ ListNode c = null,
 VarDeclNode vd;
 ConstructDeclNode cd;
 MethodDeclNode md;
+ModifsNode mn = null;
 Token t = null, t2 = null;
 
 RecoverySet f2 = new RecoverySet(SEMICOLON).union(g).remove(IDENT),
@@ -457,7 +459,7 @@ RecoverySet f2 = new RecoverySet(SEMICOLON).union(g).remove(IDENT),
   try {
     t = <LBRACE>
       [LOOKAHEAD(2) c = classlist(f5)]
-      (LOOKAHEAD(4)  t2 = modifs(g)  vd = vardecl(f2) <SEMICOLON>
+      (LOOKAHEAD(4)  mn = modifs(g)  vd = vardecl(f2) <SEMICOLON>
       { if ( v == null)
               v = new ListNode(vd);
           else
@@ -470,7 +472,7 @@ RecoverySet f2 = new RecoverySet(SEMICOLON).union(g).remove(IDENT),
               ct.add(cd);
       }
       )*
-      (LOOKAHEAD(4) t2=modifs(g) md = methoddecl(f3)
+      (LOOKAHEAD(4) mn=modifs(g) md = methoddecl(f3)
       { if ( m == null)
               m = new ListNode(md);
           else
@@ -495,13 +497,14 @@ Token t = null;
     {return t;}
 }
 
-Token modifs(RecoverySet g) throws ParseEOFException:
+ModifsNode modifs(RecoverySet g) throws ParseEOFException:
 {
-Token t1, t2 = null;
+Token t1 = null, t2 = null;
 }
 {
-     [t1 = modifvisibility(g)] [<FINAL>]
-     { return t1; }
+     [t1 = modifvisibility(g)[<FINAL>]   { return new ModifsNode(t1); }]
+     { return new ModifsNode(t1); }
+   
 }
 
 /*Types foi definido para simplificar o código */
@@ -533,22 +536,21 @@ ExpreNode e1 = null, e2 = null;
 VarDeclNode vardecl(RecoverySet g) throws ParseEOFException:
 {
 RecoverySet f = new RecoverySet(IDENT).union(g);
-Token t1 = null, t2; 
+Token t1 = null, t2 = null; 
 int k = 0;
 ListNode l = null;
 }
 {
 try {
 /* adicionado a atribuição para sempre poder declarar e iniciar uma variavel fora do método */
-  (t1 = types(f) t2 = <IDENT> ( <LBRACKET> <RBRACKET>)*
+  (t1 = types(f) t2 = <IDENT> ( <LBRACKET> <RBRACKET>{k++;})*
+  { l = new ListNode(new VarNode(t2, k)); }
   (LOOKAHEAD(1) assignment(g))?
-
-  (<COMMA>{ k = 0; } t2 = <IDENT> ( <LBRACKET> <RBRACKET> { k++; })* )* (LOOKAHEAD(1) assignment(g))?
-   { l.add(new VarNode(t2, k)); }
+  (<COMMA>{ k = 0; } t2 = <IDENT> ( <LBRACKET> <RBRACKET> { k++; })* { l.add(new VarNode(t2, k)); }
+  )* (LOOKAHEAD(1) assignment(g))?
   )
-{ return new VarDeclNode(t1, l); }
-}
-catch (ParseException e)
+  { return new VarDeclNode(t1, l); }
+}catch (ParseException e)
 {
    consumeUntil(g, e, "vardecl");
    return new VarDeclNode(t1, l);
@@ -913,10 +915,9 @@ ListNode switchcasesstat(RecoverySet g) throws ParseEOFException :
   ListNode l = null;
   StatementNode s = null;
 
-  RecoverySet f = First.switchcasesstat.union(g);
 }
 {
-    s = switchcasestat(f) [l = switchcasesstat(g)]
+    s = switchcasestat(g) [l = switchcasesstat(g)]
   { return new ListNode(s, l); }
 }
 
