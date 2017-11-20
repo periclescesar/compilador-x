@@ -455,7 +455,6 @@ public class PrintTree {
             return;
         }
 
-        System.out.println();
         System.out.print(x.number + ": IfNode ===> " + x.expr.number + " " +
             x.stat1.number + " " +
             ((x.stat2 == null) ? "null" : String.valueOf(x.stat2.number)));
@@ -494,6 +493,113 @@ public class PrintTree {
         printExpreNode(x.expr);
         printAtribNode(x.incr);
         printStatementNode(x.stat);
+    }
+
+        // ------------------------- comando do-while -----------------------
+    public void numberDoWhileNode(DoWhileNode x) {
+        if(x == null) {
+            return;
+        }
+
+        x.number = kk++;
+        numberStatementNode(x.stat);
+        numberExpreNode(x.expr);
+    }
+
+    public void printDoWhileNode(DoWhileNode x) {
+        if(x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": DoWhileNode ===> " +
+            ((x.stat == null) ? "null" : String.valueOf(x.stat.number)) + " " +
+            ((x.expr == null) ? "null" : String.valueOf(x.expr.number)) + " " +
+            x.stat.number);
+
+        printStatementNode(x.stat);
+        printExpreNode(x.expr);
+    }
+
+    // ------------------------- comando while -----------------------
+    public void numberWhileNode(WhileNode x) {
+        if(x == null) {
+            return;
+        }
+
+        x.number = kk++;
+        numberExpreNode(x.expr);
+        numberStatementNode(x.stat);
+    }
+
+    public void printWhileNode(WhileNode x) {
+        if(x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": WhileNode ===> " +
+            ((x.expr == null) ? "null" : String.valueOf(x.expr.number)) + " " +
+            ((x.stat == null) ? "null" : String.valueOf(x.stat.number)) + " " +
+            x.stat.number);
+
+        printExpreNode(x.expr);
+        printStatementNode(x.stat);
+    }
+
+        // ------------------------- comando switch -----------------------
+    public void numberSwitchNode(SwitchNode x) {
+        if(x == null) {
+            return;
+        }
+
+        x.number = kk++;
+        numberExpreNode(x.expr);
+        numberStatementListNode(x.stat);
+        numberStatementListNode(x.def);
+    }
+
+    public void printSwitchNode(SwitchNode x) {
+        if(x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": SwitchNode ===> " +
+            ((x.expr == null) ? "null" : String.valueOf(x.expr.number)) + " " +
+            ((x.stat == null) ? "null" : String.valueOf(x.stat.number)) + " " +
+            ((x.def == null) ? "null" : String.valueOf(x.def.number)) + " " +
+            x.stat.number);
+
+        printExpreNode(x.expr);
+        printStatementListNode(x.stat);
+        printStatementListNode(x.def);
+    }
+
+    // ------------------------- comando switch-case -----------------------
+    public void numberSwitchCaseNode(SwitchCaseNode x) {
+        if(x == null) {
+            return;
+        }
+
+        x.number = kk++;
+        numberExpreNode(x.expr);
+        numberStatementListNode(x.stat);
+    }
+
+    public void printSwitchCaseNode(SwitchCaseNode x) {
+        if(x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": SwitchCaseNode ===> " +
+            ((x.expr == null) ? "null" : String.valueOf(x.expr.number)) + " " +
+            ((x.stat == null) ? "null" : String.valueOf(x.stat.number)) + " " +
+            x.stat.number);
+
+        printExpreNode(x.expr);
+        printStatementListNode(x.stat);
     }
 
     // --------------------------- Comando break --------------------
@@ -905,7 +1011,15 @@ public class PrintTree {
             printIfNode((IfNode) x);
         } else if (x instanceof ForNode) {
             printForNode((ForNode) x);
-        } else if (x instanceof PrintNode) {
+        }else if (x instanceof WhileNode) {
+            printWhileNode((WhileNode) x);
+        }else if (x instanceof DoWhileNode) {
+            printDoWhileNode((DoWhileNode) x);
+        }else if (x instanceof SwitchNode) {
+            printSwitchNode((SwitchNode) x);
+        }else if (x instanceof SwitchCaseNode) {
+            printSwitchCaseNode((SwitchCaseNode) x);
+        }else if (x instanceof PrintNode) {
             printPrintNode((PrintNode) x);
         } else if (x instanceof NopNode) {
             printNopNode((NopNode) x);
@@ -931,8 +1045,14 @@ public class PrintTree {
             numberIfNode((IfNode) x);
         } else if (x instanceof ForNode) {
             numberForNode((ForNode) x);
-        } else if (x instanceof PrintNode) {
-            numberPrintNode((PrintNode) x);
+        } else if (x instanceof WhileNode) {
+            numberWhileNode((WhileNode) x);
+        } else if (x instanceof DoWhileNode) {
+            numberDoWhileNode((DoWhileNode) x);
+        } else if (x instanceof SwitchNode) {
+            numberSwitchNode((SwitchNode) x);
+        } else if (x instanceof SwitchCaseNode) {
+            numberSwitchCaseNode((SwitchCaseNode) x);
         } else if (x instanceof NopNode) {
             numberNopNode((NopNode) x);
         } else if (x instanceof ReadNode) {

@@ -4,12 +4,12 @@ import parser.*;
 
 
 public class SwitchCaseNode extends StatementNode {
-    public StatementNode stat;
 	public ExpreNode expr;
+    public ListNode stat;
 
-    public SwitchCaseNode(Token t, ExpreNode e1, StatementNode s) {
+    public SwitchCaseNode(Token t, ExpreNode e, ListNode l) {
         super(t);
-		expr = e1;
-        stat = s;
+        expr = e;
+        stat = l;
     }
 }
