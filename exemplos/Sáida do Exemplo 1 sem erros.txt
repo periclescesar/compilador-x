@@ -1,4 +1,0 @@
-X++ Compiler - Version 1.0 - 2004
-Lendo o arquivo exemplos/exemplo1.x . . .
-0 erros léxico encontrados
-0erros sintáticos encontrados

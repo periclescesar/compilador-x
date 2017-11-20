@@ -1,0 +1,21 @@
+X++ Compiler - Version 1.0 - 2004
+Lendo o arquivo exemplos/exemplo2.x . . .
+0 erros léxico encontrados
+0erros sintáticos encontrados
+
+1: ListNode (ClassDeclNode)  ===> 2 null
+2: ClassDeclNode ===> a null 3
+3: ClassBodyNode ===> null 4 8 19
+4: ListNode (VarDeclNode) ===> 5 null
+5: VarDeclNode ===> string 6
+6: ListNode (VarNode) ===> 7 null
+7: VarNode ===> b 
+8: ListNode (ConstructDeclNode) ===> 9 null
+9: ConstructDeclNode ===> 10
+10: MethodBodyNode ===> 11 15
+11: ListNode (VarDeclNode) ===> 12 null
+12: VarDeclNode ===> int 13
+13: ListNode (VarNode) ===> 14 null
+14: VarNode ===> c 
+15: BlockNode ===> 16
+16: ListNode (StatementNode) ===> 17 null

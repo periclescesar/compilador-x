@@ -417,7 +417,7 @@ RecoverySet f = First.classlist.union(g);
 }
 {
 (
-   c = classdecl(f) [LOOKAHEAD(2) classlist(g)]
+   c = classdecl(f) [LOOKAHEAD(2) l = classlist(g)]
 )  { return new ListNode(c, l);}
 }
 
