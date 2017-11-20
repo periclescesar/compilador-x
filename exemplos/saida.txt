@@ -1,21 +1,201 @@
+marcelo@marcelo-HP-1000-Notebook-PC:~/Documentos/compilador-x$ ./example.sh
 X++ Compiler - Version 1.0 - 2004
-Lendo o arquivo exemplos/exemplo2.x . . .
+Lendo o arquivo exemplos/exemplo1.x . . .
 0 erros léxico encontrados
 0erros sintáticos encontrados
 
 1: ListNode (ClassDeclNode)  ===> 2 null
-2: ClassDeclNode ===> a null 3
-3: ClassBodyNode ===> null 4 8 19
-4: ListNode (VarDeclNode) ===> 5 null
-5: VarDeclNode ===> string 6
-6: ListNode (VarNode) ===> 7 null
-7: VarNode ===> b 
-8: ListNode (ConstructDeclNode) ===> 9 null
-9: ConstructDeclNode ===> 10
-10: MethodBodyNode ===> 11 15
-11: ListNode (VarDeclNode) ===> 12 null
-12: VarDeclNode ===> int 13
+2: ClassDeclNode ===> programateste01 null 3
+3: ClassBodyNode ===> 4 7 null 51
+4: ListNode (ClassDeclNode)  ===> 5 null
+5: ClassDeclNode ===> InnerClass null 6
+6: ClassBodyNode ===> null null null null
+7: ListNode (VarDeclNode) ===> 8 11
+8: VarDeclNode ===> char 9
+9: ListNode (VarNode) ===> 10 null
+10: VarNode ===> cwh 
+11: ListNode (VarDeclNode) ===> 12 15
+12: VarDeclNode ===> byte 13
 13: ListNode (VarNode) ===> 14 null
-14: VarNode ===> c 
-15: BlockNode ===> 16
-16: ListNode (StatementNode) ===> 17 null
+14: VarNode ===> variavel3 
+15: ListNode (VarDeclNode) ===> 16 19
+16: VarDeclNode ===> short 17
+17: ListNode (VarNode) ===> 18 null
+18: VarNode ===> variavel4 
+19: ListNode (VarDeclNode) ===> 20 23
+20: VarDeclNode ===> long 21
+21: ListNode (VarNode) ===> 22 null
+22: VarNode ===> variavel5 
+23: ListNode (VarDeclNode) ===> 24 27
+24: VarDeclNode ===> float 25
+25: ListNode (VarNode) ===> 26 null
+26: VarNode ===> variavel1 
+27: ListNode (VarDeclNode) ===> 28 31
+28: VarDeclNode ===> float 29
+29: ListNode (VarNode) ===> 30 null
+30: VarNode ===> variavel2 
+31: ListNode (VarDeclNode) ===> 32 35
+32: VarDeclNode ===> string 33
+33: ListNode (VarNode) ===> 34 null
+34: VarNode ===> str 
+35: ListNode (VarDeclNode) ===> 36 39
+36: VarDeclNode ===> int 37
+37: ListNode (VarNode) ===> 38 null
+38: VarNode ===> idade 
+39: ListNode (VarDeclNode) ===> 40 43
+40: VarDeclNode ===> int 41
+41: ListNode (VarNode) ===> 42 null
+42: VarNode ===> cont 
+43: ListNode (VarDeclNode) ===> 44 47
+44: VarDeclNode ===> int 45
+45: ListNode (VarNode) ===> 46 null
+46: VarNode ===> cont2 
+47: ListNode (VarDeclNode) ===> 48 null
+48: VarDeclNode ===> string 49
+49: ListNode (VarNode) ===> 50 null
+50: VarNode ===> genero 
+51: ListNode (MethodDeclNode) ===> 52 81
+52: MethodDeclNode ===> public calcFor 53
+53: MethodBodyNode ===> null 54
+54: BlockNode ===> 55
+55: ListNode (StatementNode) ===> 56 null
+56: ForNode ===> 57 0 60 65
+57: AtribNode ===> 58 59
+58: VarNode ===> cont 
+59: IntConstNode ===> 0
+60: AtribNode ===> 61 62
+61: VarNode ===> cont 
+62: AddNode ===> 63 + 64
+63: VarNode ===> cont 
+64: IntConstNode ===> 1
+65: BlockNode ===> 66
+66: ListNode (StatementNode) ===> 67 null
+67: ForNode ===> 68 0 71 76
+68: AtribNode ===> 69 70
+69: VarNode ===> cont2 
+70: IntConstNode ===> 0
+71: AtribNode ===> 72 73
+72: VarNode ===> cont2 
+73: AddNode ===> 74 + 75
+74: VarNode ===> cont2 
+75: IntConstNode ===> 1
+76: BlockNode ===> 77
+77: ListNode (StatementNode) ===> 78 null
+78: AtribNode ===> 79 80
+79: VarNode ===> variavel4 
+80: IntConstNode ===> 2
+81: ListNode (MethodDeclNode) ===> 82 103
+82: MethodDeclNode ===> private calcIf 83
+83: MethodBodyNode ===> null 84
+84: BlockNode ===> 85
+85: ListNode (StatementNode) ===> 86 9286: IfNode ===> 0 87 null
+87: BlockNode ===> 88
+88: ListNode (StatementNode) ===> 89 null
+89: VarDeclNode ===> int 90
+90: ListNode (VarNode) ===> 91 null
+91: VarNode ===> variavel3 
+92: ListNode (StatementNode) ===> 93 null93: IfNode ===> 0 94 101
+94: BlockNode ===> 95
+95: ListNode (StatementNode) ===> 96 null96: IfNode ===> 0 97 99
+97: BlockNode ===> 98
+98: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "1+2 é maior que 4"
+99: BlockNode ===> 100
+100: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "1+2 NÃO é maior que 4"
+101: BlockNode ===> 102
+102: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "Não verdadeiro!"
+103: ListNode (MethodDeclNode) ===> 104 112
+104: MethodDeclNode ===> protected calcDoWhile 105
+105: MethodBodyNode ===> null 106
+106: BlockNode ===> 107
+107: ListNode (StatementNode) ===> 108 null
+108: DoWhileNode ===> 109 0 109
+109: AtribNode ===> 110 111
+110: VarNode ===> genero 
+111: StringConstNode ===> "mulher"
+112: ListNode (MethodDeclNode) ===> 113 121
+113: MethodDeclNode ===> public CalcWhile 114
+114: MethodBodyNode ===> null 115
+115: BlockNode ===> 116
+116: ListNode (StatementNode) ===> 117 null
+117: WhileNode ===> 0 118 118
+118: AtribNode ===> 119 120
+119: VarNode ===> genero 
+120: StringConstNode ===> "homem"
+121: ListNode (MethodDeclNode) ===> 122 143
+122: MethodDeclNode ===> void calcSwitchCase 123
+123: MethodBodyNode ===> 124 128
+124: ListNode (VarDeclNode) ===> 125 null
+125: VarDeclNode ===> string 126
+126: ListNode (VarNode) ===> 127 null
+127: VarNode ===> abc 
+128: BlockNode ===> 129
+129: ListNode (StatementNode) ===> 130 null
+130: SwitchNode ===> 131 132 null 132
+131: VarNode ===> abc 
+132: ListNode (StatementNode) ===> 133 136
+133: SwitchCaseNode ===> 134 135 135
+134: StringConstNode ===> "abc"
+135: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "Ordem lexixografica"
+136: ListNode (StatementNode) ===> 137 140
+137: SwitchCaseNode ===> 138 139 139
+138: StringConstNode ===> "123"
+139: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "Ordem crescente"
+140: ListNode (StatementNode) ===> 141 null
+141: SwitchCaseNode ===> null 142 142
+142: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "Outra ordem"
+143: ListNode (MethodDeclNode) ===> 144 null
+144: MethodDeclNode ===> void operadores 145
+145: MethodBodyNode ===> null 146
+146: BlockNode ===> 147
+147: ListNode (StatementNode) ===> 148 149148: IfNode ===> 0 0 0
+0: PrintNode ===> 0
+0: StringConstNode ===> "Dois generos"
+0: PrintNode ===> 0
+0: StringConstNode ===> "Outros"
+149: ListNode (StatementNode) ===> 150 153
+150: VarDeclNode ===> boolean 151
+151: ListNode (VarNode) ===> 152 null
+152: VarNode ===> isHomem 
+153: ListNode (StatementNode) ===> 154 163154: IfNode ===> 0 155 159
+155: BlockNode ===> 156
+156: ListNode (StatementNode) ===> 0 157
+0: PrintNode ===> 0
+0: StringConstNode ===> "Mulher"
+157: ListNode (StatementNode) ===> 0 158
+0: PrintNode ===> 0
+0: StringConstNode ===> "..."
+158: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "..."
+159: BlockNode ===> 160
+160: ListNode (StatementNode) ===> 0 161
+0: PrintNode ===> 0
+0: StringConstNode ===> ""
+161: ListNode (StatementNode) ===> 0 162
+0: PrintNode ===> 0
+0: StringConstNode ===> ""
+162: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> ""
+163: ListNode (StatementNode) ===> 164 167164: IfNode ===> 0 165 null
+165: BlockNode ===> 166
+166: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "Definitivamente é homem"
+167: ListNode (StatementNode) ===> 168 null168: IfNode ===> 0 169 null
+169: BlockNode ===> 170
+170: ListNode (StatementNode) ===> 0 null
+0: PrintNode ===> 0
+0: StringConstNode ===> "2 é menor q 1+2"
