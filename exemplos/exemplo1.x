@@ -10,13 +10,14 @@ public class programateste01
     final byte variavel3=1;
     private final short variavel4=10;
     protected long variavel5=10.1;
-    public float variavel1=7.0;
-    float variavel2=10.1;
+    public int variavel1=7;
+    int variavel2=10;
     string str = "ab";
     int idade = 0; 
     int cont;
     int cont2;
     string genero;
+    boolean cond = true;
 
     public void calcFor() {
         for (cont = 0; cont < variavel1; cont = (cont + 1)) {
