@@ -9,6 +9,8 @@
 .classpath
 !recovery/*
 !syntacticTree/*
+!semanalysis/*
+!symtable/*
 pom.xml
 recovery/*.class
 syntacticTree/*.class
