@@ -1125,6 +1125,10 @@ Token t;
        | 
           t = <double_constant>  { e = new DoubleConstNode(t); }
        |
+          t = <long_constant>  { e = new LongConstNode(t); }
+       |
+          t = <short_constant>  { e = new ShortConstNode(t); }
+       |
           t = <string_constant>  { e = new StringConstNode(t); } 
        | 
           t = <bool_constant>  { e = new CondExpressionNode(t); } 
