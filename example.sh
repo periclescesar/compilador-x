@@ -1,1 +1,1 @@
-java parser.langX -print_tree exemplos/exemplo1.x
+java parser.langX exemplos/exemplo1.x

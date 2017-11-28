@@ -6,6 +6,7 @@
   - recuperação de erros sintáticos
   - construção da árvore sintática 
   - impressão da árvore sintática
+  - análise semântica (1a, 2a e 3a fase)
 
 Autor: Francisco Teixeira, Marcelo Ecker e Péricles Cesar da Costa
 Este programa é parte do livro "Construção de compiladores usando ferra..."
@@ -20,6 +21,7 @@ PARSER_BEGIN(langX)
     import java.io.*;
     import recovery.*; //importa as classes de recuperação de erros do AS
     import syntacticTree.*; // importa as classes dos nos da árvore sintática
+    import semanalysis.*; //importa as classe para análise semântica
 
     public class langX {
         final static String Version = "X++ Compiler - Version 1.0 - 2004";
@@ -99,6 +101,16 @@ PARSER_BEGIN(langX)
                 PrintTree prt = new PrintTree();
                 prt.printRoot(root);     // chama método para imprimir árvore
             }
+
+            TypeCheck tc = new TypeCheck();
+            try{
+              tc.TypeCheckRoot(root);
+              System.out.println("0 Semantic Errors found");
+            }
+            catch (SemanticException e)
+        {
+            System.out.println(e.getMessage());
+        }
 
         }  // main
 
