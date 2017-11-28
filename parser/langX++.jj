@@ -1131,7 +1131,7 @@ Token t;
        |
           t = <string_constant>  { e = new StringConstNode(t); } 
        | 
-          t = <bool_constant>  { e = new CondExpressionNode(t); } 
+          t = <bool_constant>  { e = new BoolConstNode(t); } 
        |
           t = <null_constant>  { e = new NullConstNode(t); } 
        |
