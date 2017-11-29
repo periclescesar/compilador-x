@@ -268,9 +268,9 @@ TOKEN:
 
 TOKEN :
 {
-    < byte_constant: (<DIGIT>)+ ["b", "B"] >
+    < byte_constant: (<DIGIT>)+ >
     |
-    < short_constant: (<DIGIT>)+ ["s", "S"] >
+    < short_constant: (<DIGIT>)+ >
     |
     < int_constant:(  
             ( (<DIGIT>)+ ) // números decimais 

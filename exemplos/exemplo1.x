@@ -8,7 +8,7 @@ public class programateste01
 
     char cwh='a';
     final byte variavel3=1;
-    private final short variavel4=10;
+    private short variavel4 = 10;
     protected long variavel5=10.1;
     public int variavel1=7;
     int variavel2=10;
@@ -20,6 +20,7 @@ public class programateste01
     boolean cond = true;
 
     public void calcFor() {
+        cont=0;
         for (cont = 0; cont < variavel1; cont = (cont + 1)) {
             for(cont2 = 0; cont2 < variavel2; cont2 = (cont2 + 1))
             {
@@ -30,7 +31,7 @@ public class programateste01
 
     private void calcIf(){
         if((variavel1 != 10) && (variavel2 == 50)){
-            int variavel3 = 5;
+            variavel3 = 5;
         }
 
         if (true) {

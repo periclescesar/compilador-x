@@ -615,10 +615,35 @@ public class TypeCheck extends VarCheck {
         }
     }
 
+    protected boolean isSubTypeImplicitInt(EntryTable t) {
+        if (t == SHORT_TYPE) {
+            return true;
+        }
+        return isSubTypeImplicitShort(t);
+    }
+
+    protected boolean isSubTypeImplicitShort(EntryTable t) {
+        if (t == BYTE_TYPE) {
+            return true;
+        }
+        return false;
+    }
+
     protected boolean isSubClass(EntryTable t1, EntryTable t2) {
         // verifica se são o mesmo tipo (vale para tipos simples)
         if (t1 == t2) {
             return true;
+        }
+
+        // Verifica se um subtipo implicito
+        if (t1 instanceof EntrySimple && t2 instanceof EntrySimple) {
+            if (t1 == INT_TYPE) {
+                return isSubTypeImplicitInt(t2);
+            }
+
+            if (t1 == SHORT_TYPE) {
+                return isSubTypeImplicitShort(t2);
+            }
         }
 
         // verifica se são classes
@@ -647,7 +672,7 @@ public class TypeCheck extends VarCheck {
         try {
             t = TypeCheckExpreNode(x.expr);
 
-            if ((t.ty != INT_TYPE) || (t.dim != 0)) {
+            if ((t == null) || (t.ty != INT_TYPE) && (t.ty != BOOL_TYPE) || (t.dim != 0)) {
                 throw new SemanticException(x.expr.position,
                     "Integer or boolean expression expected");
             }
@@ -732,7 +757,7 @@ public class TypeCheck extends VarCheck {
         try {
             t = TypeCheckExpreNode(x.expr);
 
-            if ((t.ty != INT_TYPE) || (t.ty != BOOL_TYPE) ||  (t.dim != 0)) {
+            if ((t == null) || (t.ty != INT_TYPE) && (t.ty != BOOL_TYPE) ||  (t.dim != 0)) {
                 throw new SemanticException(x.expr.position,
                     "Integer or boolean expression expected");
             }
@@ -766,7 +791,7 @@ public class TypeCheck extends VarCheck {
         try {
             t = TypeCheckExpreNode(x.expr);
 
-            if ((t.ty != INT_TYPE) || (t.ty != BOOL_TYPE) ||  (t.dim != 0)) {
+            if ((t == null) || (t.ty != INT_TYPE) && (t.ty != BOOL_TYPE) ||  (t.dim != 0)) {
                 throw new SemanticException(x.expr.position,
                     "Integer or boolean expression expected");
             }
@@ -1038,7 +1063,7 @@ public class TypeCheck extends VarCheck {
         }
 
         // 2 operadores inteiros, OK
-        if (i == 2) {
+        if ((i + s + by) == 2) {
             return new type(INT_TYPE, 0);
         }
         //2 operadores double, OK
@@ -1050,7 +1075,7 @@ public class TypeCheck extends VarCheck {
             return new type(LONG_TYPE, 0);
         }
         //2 operadores short 
-        if (s == 2) {
+        if ((s + by) == 2) {
             return new type(SHORT_TYPE, 0);
         }
         //2 operadores byte
@@ -1228,7 +1253,7 @@ public class TypeCheck extends VarCheck {
         }
 
         // só int é aceito
-        if (t.ty != INT_TYPE || t.ty != BOOL_TYPE) {
+        if (t.ty != INT_TYPE && t.ty != BOOL_TYPE) {
             throw new SemanticException(x.position,
                 "Incompatible type for unary " + x.position.image);
         }
@@ -1394,7 +1419,7 @@ public class TypeCheck extends VarCheck {
             throw new SemanticException(x.position, "Invalid byte constant");
         }
 
-        return new type(FLOAT_TYPE, 0);
+        return new type(BYTE_TYPE, 0);
 
     }
 
@@ -1413,20 +1438,15 @@ public class TypeCheck extends VarCheck {
         t2 = TypeCheckExpreNode(x.expr2);
         t3 = TypeCheckExpreNode(x.cen);
 
-
-        System.out.println(t1.ty ==BOOL_TYPE);
-
         if(t2 != null){
             if((t1.ty == INT_TYPE || t1.ty == BOOL_TYPE) && (t2.ty == INT_TYPE || t2.ty == BOOL_TYPE)){
             return new type(t1.ty, 0);
             }    
-        }else{
+        }else if (t1 != null) {
             if(t1.ty == INT_TYPE || t1.ty == BOOL_TYPE){
                  return new type(t1.ty, 0);
             }
         }
-
-        
 
         return null;
     }
