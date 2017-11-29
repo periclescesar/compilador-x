@@ -14,6 +14,7 @@
 pom.xml
 recovery/*.class
 syntacticTree/*.class
+semanalysis/*.class
 .classpath
 .project
 .settings/
