@@ -20,6 +20,12 @@ public class programateste01
     boolean cond = true;
 
     public void calcFor() {
+    	boolean isTeste = 5 < 4 && 3 <= (2+1);
+    	print("AQUIIIIII");
+		if(isTeste){
+			print("Entrou");
+		}
+    	
         cont=0;
         for (cont = 0; cont < variavel1; cont = (cont + 1)) {
             for(cont2 = 0; cont2 < variavel2; cont2 = (cont2 + 1))

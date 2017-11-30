@@ -724,7 +724,7 @@ public class PrintTree {
 
         System.out.println();
         System.out.print(x.number + ": RelationalNode ===> " + x.expr1.number +
-            " " + x.position.image + " " + x.expr2.number);
+            " " + x.position.image + " " + x.expr2.number + " " + x.expr2.number);
         printExpreNode(x.expr1);
         printExpreNode(x.expr2);
     }

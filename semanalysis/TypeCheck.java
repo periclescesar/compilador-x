@@ -672,7 +672,7 @@ public class TypeCheck extends VarCheck {
         try {
             t = TypeCheckExpreNode(x.expr);
 
-            if ((t == null) || (t.ty != INT_TYPE) && (t.ty != BOOL_TYPE) || (t.dim != 0)) {
+            if ((t.ty != INT_TYPE) || (t.ty != BOOL_TYPE) || (t.dim != 0)) {
                 throw new SemanticException(x.expr.position,
                     "Integer or boolean expression expected");
             }
@@ -1448,7 +1448,8 @@ public class TypeCheck extends VarCheck {
             }
         }
 
-        return null;
+        // TODO: CORRIGIR O RETORNO, O PROBLEMA EH AQUI
+        return new type(t1.ty, 0);
     }
 
 
@@ -1626,6 +1627,7 @@ public class TypeCheck extends VarCheck {
         } else if (x instanceof VarNode) {
             return TypeCheckVarNode((VarNode) x);
         } else if (x instanceof IfExpressionNode){
+        	System.out.println("È IFSAO");
             return TypeCheckIfExpressionNode((IfExpressionNode) x);
         } else if(x instanceof CondExpressionNode){
             return TypeCheckCondExpressionNode((CondExpressionNode) x);
