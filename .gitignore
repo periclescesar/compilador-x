@@ -8,9 +8,9 @@
 .project
 .classpath
 !recovery/*
-!syntacticTree/*
-!semanalysis/*
-!symtable/*
+!syntacticTree/*.java
+!semanalysis/*.java
+!symtable/*.java
 pom.xml
 recovery/*.class
 syntacticTree/*.class
