@@ -18,3 +18,5 @@ semanalysis/*.class
 .classpath
 .project
 .settings/
+
+bin/
