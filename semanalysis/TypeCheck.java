@@ -28,6 +28,8 @@ import syntacticTree.FloatConstNode;
 import syntacticTree.ForNode;
 import syntacticTree.IfExpressionNode;
 import syntacticTree.IfNode;
+import syntacticTree.SwitchCaseNode;
+import syntacticTree.SwitchNode;
 import syntacticTree.IndexNode;
 import syntacticTree.IntConstNode;
 import syntacticTree.ListNode;
@@ -709,6 +711,49 @@ public class TypeCheck extends VarCheck {
 		}
 	}
 
+	// ---------------------------------- comando switch  --------------------
+	public void TypeCheckSwitchNode(SwitchNode x) {
+		type t;
+		type c;
+
+		if (x == null) {
+			return;
+		}
+
+		try {
+			t = TypeCheckExpreNode(x.expr);
+
+                        if (t.dim == 0) {
+				throw new SemanticException(x.expr.position, "expression expected");
+			}
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+                try {
+                    for (k = 0, p = x.stat; p != null; p = p.next) {
+                        c = TypeCheckExpreNode((ExpreNode) p.node);
+
+                        if ((c.ty != t.ty) || (t.dim != 0)) {
+                            throw new SemanticException(p.position, "Case com tipo diferente da expressão no switch");
+                        }
+
+                        k++;
+                    }
+                    //TypeCheckListNode(x.stat);
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+	// try {
+	//		TypeCheckStatementNode(x.def);
+	//	} catch (SemanticException e) {
+	//		System.out.println(e.getMessage());
+	//		foundSemanticError++;
+	//	}
+        }
 	// ------------------------- comando for -----------------------
 	public void TypeCheckForNode(ForNode x) {
 		type t;
@@ -1420,7 +1465,6 @@ public class TypeCheck extends VarCheck {
 			}
 		}
 
-		// TODO: CORRIGIR O RETORNO, O PROBLEMA EH AQUI
 		return new type(BOOL_TYPE, 0);
 	}
 

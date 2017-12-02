@@ -37,7 +37,7 @@ public class programateste01
 
     private void calcIf(){
         if((variavel1 != 10) && (variavel2 == 50)){
-            variavel3 = gi;
+            variavel3 = 10;
         }
 
         if (true) {
