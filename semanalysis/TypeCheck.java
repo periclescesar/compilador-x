@@ -733,9 +733,10 @@ public class TypeCheck extends VarCheck {
 
                 try {
                     for (k = 0, p = x.stat; p != null; p = p.next) {
-                        c = TypeCheckExpreNode((ExpreNode) p.node);
+                        c = TypeCheckSwitchCaseNode((SwitchCaseNode) p.node);
+                        cexpr = c.expr;
 
-                        if ((c.ty != t.ty) || (t.dim != 0)) {
+                        if ((cexpr.ty != t.ty) || (t.dim != 0)) {
                             throw new SemanticException(p.position, "Case com tipo diferente da expressão no switch");
                         }
 
