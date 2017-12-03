@@ -68,8 +68,6 @@ public class programateste01
                 print("Ordem lexixografica");
             case "123":
                 print("Ordem crescente");
-            default:
-                print("Outra ordem");
         }
     }
 
