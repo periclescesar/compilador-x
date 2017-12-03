@@ -242,6 +242,7 @@ TOKEN :
     | < RETURN: "return" >
     | < SUPER: "super" >
     /*novos itens */
+    | < THIS: "this">
     | < WHILE: "while" >
     | < DO: "do" >
     | < SWITCH: "switch" >
@@ -530,7 +531,6 @@ RecoverySet f2 = new RecoverySet(SEMICOLON).union(g).remove(IDENT),
    }
 }
 
-
 Token assignment(RecoverySet g) throws ParseEOFException:
 {
 Token t = null;
@@ -550,8 +550,7 @@ ListNode l = null;
 }
 {
 try {
-/* adicionado a atribuição para sempre poder declarar e iniciar uma variavel fora do método */
-  [t3 = <FINAL>](t1 = <VAR_TYPE> t2 = <IDENT> ( <LBRACKET> <RBRACKET>{k++;})*
+  [t3 = <FINAL>]( (t1 = <VAR_TYPE> )  t2 = <IDENT> ( <LBRACKET> <RBRACKET>{k++;})*
   { l = new ListNode(new VarNode(t2, k)); }
   (LOOKAHEAD(1) assignment(g))?
   (<COMMA>{ k = 0; } t2 = <IDENT> ( <LBRACKET> <RBRACKET> { k++; })* { l.add(new VarNode(t2, k)); }
@@ -676,9 +675,9 @@ RecoverySet f2 = new RecoverySet(RBRACE).union(g).remove(IDENT);
 try {
 (
     LOOKAHEAD(3)
-    s = methoddecl(f1) <SEMICOLON>
-|  
     s = vardecl(f1) <SEMICOLON>
+|
+	LOOKAHEAD(4) s = methodcall(f1) <SEMICOLON>
 |
     s = atribstat(f1) <SEMICOLON> 
 |
@@ -714,6 +713,30 @@ catch (ParseException e)
 }
 }
 
+StatementNode methodcall(RecoverySet g) throws ParseEOFException :
+{
+	Token t = null, t1 = null;
+	ListNode l = null;
+	MethodCallNode m = null;
+	RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+}
+{
+	try {
+		[ (t1 = <THIS> | t1 = <SUPER> ) <DOT> ] t = <IDENT>
+		( <DOT> <IDENT> )* <LPAREN> l = arglist(f1) <RPAREN>
+		{
+			if(t1 != null) {
+				t = t1;
+			}
+			m = new MethodCallNode(t, l);
+			return m;
+		}
+	} catch(ParseException e) {
+		consumeUntil(g, e, "methodcall");
+		{ return m; }
+	}
+}
+
 
 AtribNode atribstat(RecoverySet g) throws ParseEOFException :
 {
@@ -737,6 +760,7 @@ catch (ParseException e)
 }
 
 }
+
 
 PrintNode printstat(RecoverySet g) throws ParseEOFException :
 {
